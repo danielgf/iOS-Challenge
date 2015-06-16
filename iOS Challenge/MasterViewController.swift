@@ -71,7 +71,6 @@ class MasterViewController: UITableViewController,NSFetchedResultsControllerDele
                     //loop to pass all of the json
                     for items in jsonResult {
                         
-//                        println(jsonResult)
                         //conditions to take what I want from the json
                         if let title = items["title"] as? String{
                             
@@ -83,8 +82,8 @@ class MasterViewController: UITableViewController,NSFetchedResultsControllerDele
                                         
                                         if let date = items["date"] as? String{
 
-//                                            if let image = items["http"] as? String{
-                                        
+//                                            if let image = items["http://"] as? String{
+                                            
                                                 //Creating a variable to stoke the information in CoreData
                                                 var newInfo:NSManagedObject = NSEntityDescription.insertNewObjectForEntityForName("Information", inManagedObjectContext: context) as! NSManagedObject
                                                 
@@ -147,7 +146,6 @@ class MasterViewController: UITableViewController,NSFetchedResultsControllerDele
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
         self.configureCell(cell, atIndexPath: indexPath)
-        
         return cell
     }
 
@@ -158,8 +156,21 @@ class MasterViewController: UITableViewController,NSFetchedResultsControllerDele
     
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject
+        
         cell.textLabel!.text = object.valueForKey("title")!.description
-        cell.detailTextLabel?.text = object.valueForKey("content")!.description
+        
+        //Creating new variables to put two informations on the description off the cell
+        var yString = object.valueForKey("date")!.description
+        var xString = object.valueForKey("author")!.description
+        
+        //We make one adding off the two variables and than we show
+        var zString = "Author: " + xString + " - Date: " + yString
+        cell.detailTextLabel?.text=zString
+
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     // MARK: - Fetched results controller
@@ -206,4 +217,3 @@ class MasterViewController: UITableViewController,NSFetchedResultsControllerDele
     }
 
 }
-
