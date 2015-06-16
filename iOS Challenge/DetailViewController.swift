@@ -10,17 +10,36 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var authorLabel: UILabel!
+    @IBOutlet weak var webLabel: UILabel!
+    @IBOutlet weak var contentText: UITextView!
+    
     var detailItem: AnyObject? {
         didSet {
             // Update the view.
             self.configureView()
         }
     }
-
+    
     func configureView() {
         // Update the user interface for the detail item.
-
+        if let detail: AnyObject = self.detailItem {
+            if let title = self.titleLabel {
+                if let author = self.authorLabel {
+                    if let web = self.webLabel {
+                        if let content = contentText {
+                            title.text = detail.valueForKey("title")!.description
+                            author.text = detail.valueForKey("author")!.description
+                            web.text = detail.valueForKey("website")!.description
+                            content.text = detail.valueForKey("content")!.description
+                        }
+                    }
+                }
+            }
+        }
     }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()

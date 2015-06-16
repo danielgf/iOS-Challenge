@@ -351,6 +351,7 @@
 				INFOPLIST_FILE = "iOS Challenge/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -361,6 +362,7 @@
 				INFOPLIST_FILE = "iOS Challenge/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -417,6 +419,7 @@
 				65915C021B2A1E7400CB615F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		65915C031B2A1E7400CB615F /* Build configuration list for PBXNativeTarget "iOS ChallengeTests" */ = {
 			isa = XCConfigurationList;
@@ -425,6 +428,7 @@
 				65915C051B2A1E7400CB615F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
