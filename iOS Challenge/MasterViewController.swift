@@ -81,8 +81,8 @@ class MasterViewController: UITableViewController,NSFetchedResultsControllerDele
                                   
                                     if let website = items["website"] as? String{
                                         
-//                                        if let date = items["date:"] as? String{
-//                                            
+                                        if let date = items["date"] as? String{
+
 //                                            if let image = items["http"] as? String{
                                         
                                                 //Creating a variable to stoke the information in CoreData
@@ -93,12 +93,12 @@ class MasterViewController: UITableViewController,NSFetchedResultsControllerDele
                                                 newInfo.setValue(content, forKey: "content")
                                                 newInfo.setValue(author, forKey: "author")
                                                 newInfo.setValue(website, forKey: "website")
-//                                                newInfo.setValue(date, forKey: "date")
+                                                newInfo.setValue(date, forKey: "date")
 //                                                newInfo.setValue(image, forKey: "image")
 
                                                 context.save(nil)
 //                                            }
-//                                        }
+                                        }
                                     }
                                 }
                             }
@@ -111,14 +111,11 @@ class MasterViewController: UITableViewController,NSFetchedResultsControllerDele
                 //Reloading TableView
                 self.tableView.reloadData()
             }
-            
         })
         
         task.resume()
-
-
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

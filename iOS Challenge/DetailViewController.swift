@@ -14,6 +14,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var webLabel: UILabel!
     @IBOutlet weak var contentText: UITextView!
+    @IBOutlet weak var dateLabel: UILabel!
     
     var detailItem: AnyObject? {
         didSet {
@@ -29,10 +30,13 @@ class DetailViewController: UIViewController {
                 if let author = self.authorLabel {
                     if let web = self.webLabel {
                         if let content = contentText {
-                            title.text = detail.valueForKey("title")!.description
-                            author.text = detail.valueForKey("author")!.description
-                            web.text = detail.valueForKey("website")!.description
-                            content.text = detail.valueForKey("content")!.description
+                            if let date = self.dateLabel{
+                                title.text = detail.valueForKey("title")!.description
+                                author.text = detail.valueForKey("author")!.description
+                                web.text = detail.valueForKey("website")!.description
+                                content.text = detail.valueForKey("content")!.description
+                                date.text = detail.valueForKey("date")!.description
+                            }
                         }
                     }
                 }
