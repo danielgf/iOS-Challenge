@@ -15,6 +15,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var webLabel: UILabel!
     @IBOutlet weak var contentText: UITextView!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet var imageShow: UIImageView!
     
     var detailItem: AnyObject? {
         didSet {
@@ -31,6 +32,7 @@ class DetailViewController: UIViewController {
                     if let web = self.webLabel {
                         if let content = contentText {
                             if let date = self.dateLabel{
+                                
                                 title.text = detail.valueForKey("title")!.description
                                 author.text = detail.valueForKey("author")!.description
                                 web.text = detail.valueForKey("website")!.description
@@ -49,6 +51,7 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.configureView()
+        
     }
 
     override func didReceiveMemoryWarning() {
