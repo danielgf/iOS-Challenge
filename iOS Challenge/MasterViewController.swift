@@ -9,7 +9,9 @@
 import UIKit
 import CoreData
 
-class MasterViewController: UITableViewController,NSFetchedResultsControllerDelegate {
+class MasterViewController: UITableViewController,NSFetchedResultsControllerDelegate,UITableViewDelegate,UITableViewDataSource {
+    
+    @IBOutlet var outletTableView: UITableView!
     
     var managedObjectContext: NSManagedObjectContext? = nil
 
@@ -92,31 +94,32 @@ class MasterViewController: UITableViewController,NSFetchedResultsControllerDele
                                             newInfo.setValue(website, forKey: "website")
                                             newInfo.setValue(date, forKey: "date")
                                             context.save(nil)
-
+                                            
                                             if let imageURL = items["image"] as? String{
                                                 
-                                                //Creating a variable to stoke the information in CoreData
-                                                var newInfo:NSManagedObject = NSEntityDescription.insertNewObjectForEntityForName("Information", inManagedObjectContext: context) as! NSManagedObject
-                                                
-                                                //Puting values to add
-                                                newInfo.setValue(imageURL, forKey: "imageURL")
 
-                                                context.save(nil)
+                                                    //Creating a variable to stoke the information in CoreData
+//                                                    var newInfo:NSManagedObject = NSEntityDescription.insertNewObjectForEntityForName("Information", inManagedObjectContext: context) as! NSManagedObject
                                                 
+                                                    //Puting values to add
+                                                    newInfo.setValue(imageURL, forKey: "imageURL")
+                                                    
+                                                    context.save(nil)
+                                                //println(newInfo)
+
                                             }
                                         }
                                     }
                                 }
                             }
                         }
+                        
 
                     }
-                    
                 }
-                
-                //Reloading TableView
-                self.tableView.reloadData()
             }
+            //Reloading TableView
+            self.outletTableView.reloadData()
         })
         
         task.resume()
@@ -168,7 +171,21 @@ class MasterViewController: UITableViewController,NSFetchedResultsControllerDele
         cell.titleLabel.text = object.valueForKey("title")!.description
         cell.authorLabel.text = object.valueForKey("author")!.description
         cell.dateLabel.text = object.valueForKey("date")!.description
-
+        
+        
+//        let urlimage:NSURL = NSURL(string: "http://lorempixel.com/400/400/technics/1/")!
+//        
+//        let data:NSData = NSData(contentsOfURL: urlimage)!
+//        
+//        let image:UIImage = UIImage(data: data)!
+        
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: TableViewCell, forRowAtIndexPath indexPath: NSIndexPath)() {
+        
+        cell.imageShow.image = UIImage(contentsOfFile: "Placeholder")
+        cell.activitiShow.startAnimating()
+        
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -209,7 +226,6 @@ class MasterViewController: UITableViewController,NSFetchedResultsControllerDele
             //println("Unresolved error \(error), \(error.userInfo)")
             abort()
         }
-        
         return _fetchedResultsController!
     }
     var _fetchedResultsController: NSFetchedResultsController? = nil

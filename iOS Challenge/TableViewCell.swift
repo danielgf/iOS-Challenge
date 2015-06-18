@@ -14,6 +14,8 @@ class TableViewCell: UITableViewCell {
     @IBOutlet var authorLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var imageShow: UIImageView!
+    @IBOutlet var activitiShow: UIActivityIndicatorView!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

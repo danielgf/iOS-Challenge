@@ -16,6 +16,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var contentText: UITextView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet var imageShow: UIImageView!
+    @IBOutlet var actionShow: UIActivityIndicatorView!
     
     var detailItem: AnyObject? {
         didSet {
@@ -32,12 +33,17 @@ class DetailViewController: UIViewController {
                     if let web = self.webLabel {
                         if let content = contentText {
                             if let date = self.dateLabel{
+                                if let showImage = self.imageShow{
                                 
-                                title.text = detail.valueForKey("title")!.description
-                                author.text = detail.valueForKey("author")!.description
-                                web.text = detail.valueForKey("website")!.description
-                                content.text = detail.valueForKey("content")!.description
-                                date.text = detail.valueForKey("date")!.description
+                                    title.text = detail.valueForKey("title")!.description
+                                    author.text = detail.valueForKey("author")!.description
+                                    web.text = detail.valueForKey("website")!.description
+                                    content.text = detail.valueForKey("content")!.description
+                                    date.text = detail.valueForKey("date")!.description
+                                    
+                                    actionShow.stopAnimating()
+
+                                }
                             }
                         }
                     }
@@ -51,6 +57,8 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.configureView()
+        
+        actionShow.startAnimating()
         
     }
 
