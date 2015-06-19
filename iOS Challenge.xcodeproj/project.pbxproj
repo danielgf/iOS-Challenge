@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6582920D1B31EF84005C44A3 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6582920C1B31EF84005C44A3 /* TableViewCell.swift */; };
 		65915BE21B2A1E7400CB615F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65915BE11B2A1E7400CB615F /* AppDelegate.swift */; };
 		65915BE51B2A1E7400CB615F /* iOS_Challenge.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 65915BE31B2A1E7400CB615F /* iOS_Challenge.xcdatamodeld */; };
 		65915BE71B2A1E7400CB615F /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65915BE61B2A1E7400CB615F /* MasterViewController.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6582920C1B31EF84005C44A3 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		65915BDC1B2A1E7400CB615F /* iOS Challenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS Challenge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65915BE01B2A1E7400CB615F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65915BE11B2A1E7400CB615F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				65915BE11B2A1E7400CB615F /* AppDelegate.swift */,
 				65915BE61B2A1E7400CB615F /* MasterViewController.swift */,
 				65915BE81B2A1E7400CB615F /* DetailViewController.swift */,
+				6582920C1B31EF84005C44A3 /* TableViewCell.swift */,
 				65915BEA1B2A1E7400CB615F /* Main.storyboard */,
 				65915BED1B2A1E7400CB615F /* Images.xcassets */,
 				65915BEF1B2A1E7400CB615F /* LaunchScreen.xib */,
@@ -218,6 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6582920D1B31EF84005C44A3 /* TableViewCell.swift in Sources */,
 				65915BE21B2A1E7400CB615F /* AppDelegate.swift in Sources */,
 				65915BE51B2A1E7400CB615F /* iOS_Challenge.xcdatamodeld in Sources */,
 				65915BE71B2A1E7400CB615F /* MasterViewController.swift in Sources */,
@@ -348,9 +352,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "iOS Challenge/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -358,9 +364,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "iOS Challenge/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -417,6 +425,7 @@
 				65915C021B2A1E7400CB615F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		65915C031B2A1E7400CB615F /* Build configuration list for PBXNativeTarget "iOS ChallengeTests" */ = {
 			isa = XCConfigurationList;
@@ -425,6 +434,7 @@
 				65915C051B2A1E7400CB615F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
