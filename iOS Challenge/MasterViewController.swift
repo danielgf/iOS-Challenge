@@ -11,8 +11,6 @@ import CoreData
 
 class MasterViewController: UITableViewController,NSFetchedResultsControllerDelegate,UITableViewDelegate,UITableViewDataSource {
     
-    @IBOutlet var outletTableView: UITableView!
-    
     var managedObjectContext: NSManagedObjectContext? = nil
 
     override func awakeFromNib() {
@@ -25,9 +23,9 @@ class MasterViewController: UITableViewController,NSFetchedResultsControllerDele
         
         var appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
-        var context: NSManagedObjectContext = appDel.managedObjectContext!
-    
-        //Download content off URL
+        var context:NSManagedObjectContext = appDel.managedObjectContext!
+        
+        //Download Contents of URL
         let urlPath = "http://www.ckl.io/challenge"
         
         //Creating the url it self
@@ -36,58 +34,62 @@ class MasterViewController: UITableViewController,NSFetchedResultsControllerDele
         //Creating a session
         let session = NSURLSession.sharedSession()
         
-        
+        //Creating a task
         let task = session.dataTaskWithURL(url!, completionHandler: { (data, response, error) -> Void in
             
-            if (error != nil){
+            //Check if is not nil
+            if(error != nil){
                 
+                //Print the error
                 println(error)
             }else{
                 
-                //Initiation JSON to convert to string and than we can use
-                let jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as! NSArray
+                //Initiation JSON to convert everything to a string and use after
+                let jsonResul = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as! NSArray
                 
-                //Checking  if have something inside the json
-                if jsonResult.count > 0{
+                //Checking if have something inside the JSON
+                if jsonResul.count > 0{
                     
                     //Creating a variable to store the values
-                    let items: () = ()
+                    let items:() = ()
                     
-                    //Delete everything before adding something new who appers in the Json
+                    //Deleting everything before adding something new who appers in the JSON
                     var request = NSFetchRequest(entityName: "Information")
                     
-                    request.returnsObjectsAsFaults = false
-                    
+                    //Creating one variable to keep the context
                     var results = context.executeFetchRequest(request, error: nil)!
                     
+                    //Checking if the variable create before have something inside
                     if results.count > 0{
+                        
+                        //Create a loop for pass into all the result
                         for results in results{
                             
+                            //Deleting everything in the context
                             context.deleteObject(results as! NSManagedObject)
                             
                             context.save(nil)
                         }
-                        
                     }
                     
-                    //loop to pass all of the json
-                    for items in jsonResult {
+                    //Create a loop to pass into JSON
+                    for items in jsonResul {
                         
-                        //conditions to take what I want from the json
+                        //Conditions to take what we need from the JSON
                         if let title = items["title"] as? String{
                             
                             if let content = items["content"] as? String{
                                 
                                 if let author = items["authors"] as? String{
-                                  
+                                    
                                     if let website = items["website"] as? String{
                                         
                                         if let date = items["date"] as? String{
                                             
-                                            //Creating a variable to stoke the information in CoreData
+                                            //Creating a variable to store the information in CoreData
                                             var newInfo:NSManagedObject = NSEntityDescription.insertNewObjectForEntityForName("Information", inManagedObjectContext: context) as! NSManagedObject
                                             
-                                            //Puting values to add
+                                            //Pass values to the CoreData
                                             newInfo.setValue(title, forKey: "title")
                                             newInfo.setValue(content, forKey: "content")
                                             newInfo.setValue(author, forKey: "author")
@@ -97,32 +99,25 @@ class MasterViewController: UITableViewController,NSFetchedResultsControllerDele
                                             
                                             if let imageURL = items["image"] as? String{
                                                 
-
-                                                    //Creating a variable to stoke the information in CoreData
-//                                                    var newInfo:NSManagedObject = NSEntityDescription.insertNewObjectForEntityForName("Information", inManagedObjectContext: context) as! NSManagedObject
-                                                
-                                                    //Puting values to add
-                                                    newInfo.setValue(imageURL, forKey: "imageURL")
-                                                    
-                                                    context.save(nil)
-                                                //println(newInfo)
-
+                                                newInfo.setValue(imageURL, forKey: "imageURL")
+                                                context.save(nil)
                                             }
                                         }
                                     }
                                 }
                             }
                         }
-                        
-
                     }
+                    
                 }
+                
             }
             //Reloading TableView
-            self.outletTableView.reloadData()
+            self.tableView.reloadData()
         })
         
         task.resume()
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -145,7 +140,8 @@ class MasterViewController: UITableViewController,NSFetchedResultsControllerDele
     // MARK: - Table View
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return self.fetchedResultsController.sections?.count ?? 0
+        //        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -161,7 +157,7 @@ class MasterViewController: UITableViewController,NSFetchedResultsControllerDele
 
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
-        return false
+        return true
     }
     
     func configureCell(cell: TableViewCell, atIndexPath indexPath: NSIndexPath) {
@@ -181,15 +177,22 @@ class MasterViewController: UITableViewController,NSFetchedResultsControllerDele
         
     }
     
+    //We create this func to custom the display of the cell
     func tableView(tableView: UITableView, willDisplayCell cell: TableViewCell, forRowAtIndexPath indexPath: NSIndexPath)() {
         
+        //We set one image into the imageView before show the real image who is coming from the URL
         cell.imageShow.image = UIImage(contentsOfFile: "Placeholder")
+        
+        //We put one animation to show the user the image is loading
         cell.activitiShow.startAnimating()
         
     }
     
+    //Create this func to put one Checkmark when you click to see the informations on the cell
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        cell?.accessoryType = .Checkmark
     }
     
     // MARK: - Fetched results controller
@@ -233,5 +236,4 @@ class MasterViewController: UITableViewController,NSFetchedResultsControllerDele
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         self.tableView.beginUpdates()
     }
-
 }

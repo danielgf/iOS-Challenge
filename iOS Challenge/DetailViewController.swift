@@ -28,27 +28,35 @@ class DetailViewController: UIViewController {
     func configureView() {
         // Update the user interface for the detail item.
         if let detail: AnyObject = self.detailItem {
-            if let title = self.titleLabel {
-                if let author = self.authorLabel {
-                    if let web = self.webLabel {
-                        if let content = contentText {
+            
+            //Create a condition to put the values
+            if let title = self.titleLabel{
+                
+                if let author = self.authorLabel{
+                    
+                    if let web = self.webLabel{
+                        
+                        if let content = self.contentText{
+                            
                             if let date = self.dateLabel{
-                                if let showImage = self.imageShow{
                                 
+                                if let showImage = self.imageShow{
+                                    
+                                    //Now we set the values
                                     title.text = detail.valueForKey("title")!.description
                                     author.text = detail.valueForKey("author")!.description
                                     web.text = detail.valueForKey("website")!.description
                                     content.text = detail.valueForKey("content")!.description
                                     date.text = detail.valueForKey("date")!.description
                                     
-                                    actionShow.stopAnimating()
-
+                                    self.actionShow.stopAnimating()
                                 }
                             }
                         }
                     }
                 }
             }
+
         }
     }
 
